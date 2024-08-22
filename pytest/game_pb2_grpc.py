@@ -46,7 +46,7 @@ class GameServiceStub(object):
                 _registered_method=True)
         self.PlayBall = channel.unary_unary(
                 '/GameService/PlayBall',
-                request_serializer=game__pb2.BallEvent.SerializeToString,
+                request_serializer=game__pb2.PlayBallRequest.SerializeToString,
                 response_deserializer=game__pb2.Game.FromString,
                 _registered_method=True)
         self.GetGame = channel.unary_unary(
@@ -87,7 +87,7 @@ def add_GameServiceServicer_to_server(servicer, server):
             ),
             'PlayBall': grpc.unary_unary_rpc_method_handler(
                     servicer.PlayBall,
-                    request_deserializer=game__pb2.BallEvent.FromString,
+                    request_deserializer=game__pb2.PlayBallRequest.FromString,
                     response_serializer=game__pb2.Game.SerializeToString,
             ),
             'GetGame': grpc.unary_unary_rpc_method_handler(
@@ -148,7 +148,7 @@ class GameService(object):
             request,
             target,
             '/GameService/PlayBall',
-            game__pb2.BallEvent.SerializeToString,
+            game__pb2.PlayBallRequest.SerializeToString,
             game__pb2.Game.FromString,
             options,
             channel_credentials,

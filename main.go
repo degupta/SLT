@@ -22,7 +22,7 @@ func (s *server) CreateGame(ctx context.Context, in *pb.CreateGameRequest) (*pb.
 	return s.controller.CreateGame(in)
 }
 
-func (s *server) PlayBall(ctx context.Context, in *pb.BallEvent) (*pb.Game, error) {
+func (s *server) PlayBall(ctx context.Context, in *pb.PlayBallRequest) (*pb.Game, error) {
 	return s.controller.PlayBall(in)
 }
 

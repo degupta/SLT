@@ -80,3 +80,11 @@ class GetGameRequest(_message.Message):
     GAMEID_FIELD_NUMBER: _ClassVar[int]
     gameId: str
     def __init__(self, gameId: _Optional[str] = ...) -> None: ...
+
+class PlayBallRequest(_message.Message):
+    __slots__ = ("gameId", "ballerEvent")
+    GAMEID_FIELD_NUMBER: _ClassVar[int]
+    BALLEREVENT_FIELD_NUMBER: _ClassVar[int]
+    gameId: str
+    ballerEvent: BallEvent
+    def __init__(self, gameId: _Optional[str] = ..., ballerEvent: _Optional[_Union[BallEvent, _Mapping]] = ...) -> None: ...

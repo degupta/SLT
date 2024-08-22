@@ -30,3 +30,40 @@ def test_create_game():
 def test_get_game():
     g = create_new_game()
     assert g == get_game(g.gameId)
+
+
+def play_ball(game_id, type, runs, batsmen, bowler):
+    return client.PlayBall(game_pb2.PlayBallRequest(gameId=game_id, ballerEvent=game_pb2.BallEvent(
+        type = type, ballerName = bowler, batsmenName=batsmen, runsScored=runs
+    )))
+
+def assert_game_status(game, num, score, balls, wickets):
+    assert len(game.balls) == num
+    assert game.firstInnings.score == score
+    assert game.firstInnings.balls == balls
+    assert game.firstInnings.wickets == wickets
+
+def test_playing_a_ball():
+    game = create_new_game()
+    game_id = game.gameId
+    assert len(game.balls) == 0
+    
+    play_ball(game_id, game_pb2.Normal, 2, PLAYER_1, PLAYER_2)
+    g = get_game(game_id)
+    assert_game_status(g, 1, 2, 1, 0)
+
+    play_ball(game_id, game_pb2.Normal, 1, PLAYER_1, PLAYER_2)
+    g = get_game(game_id)
+    assert_game_status(g, 2, 3, 2, 0)
+
+    play_ball(game_id, game_pb2.Wicket, 0, PLAYER_1, PLAYER_2)
+    g = get_game(game_id)
+    assert_game_status(g, 3, 3, 3, 1)
+
+    play_ball(game_id, game_pb2.Wide, 0, PLAYER_1, PLAYER_2)
+    g = get_game(game_id)
+    assert_game_status(g, 4, 4, 3, 1)
+
+    play_ball(game_id, game_pb2.NoBall, 1, PLAYER_1, PLAYER_2)
+    g = get_game(game_id)
+    assert_game_status(g, 5, 6, 3, 1)

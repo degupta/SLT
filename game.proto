@@ -46,10 +46,15 @@ message GetGameRequest {
     string gameId = 1;
 }
 
+message PlayBallRequest {
+    string gameId = 1;
+    BallEvent ballerEvent = 2;
+}
+
 service GameService {
   rpc CreateGame (CreateGameRequest) returns (CreateGameResponse) {}
 
-  rpc PlayBall (BallEvent) returns (Game) {}
+  rpc PlayBall (PlayBallRequest) returns (Game) {}
 
   rpc GetGame (GetGameRequest) returns (Game) {}
 }

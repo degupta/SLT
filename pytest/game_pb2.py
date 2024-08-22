@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ngame.proto\"a\n\tBallEvent\x12\x17\n\x04type\x18\x01 \x01(\x0e\x32\t.BallType\x12\x12\n\nballerName\x18\x02 \x01(\t\x12\x13\n\x0b\x62\x61tsmenName\x18\x03 \x01(\t\x12\x12\n\nrunsScored\x18\x04 \x01(\x05\"<\n\x0bInningsData\x12\r\n\x05score\x18\x01 \x01(\x05\x12\x0f\n\x07wickets\x18\x02 \x01(\x05\x12\r\n\x05\x62\x61lls\x18\x03 \x01(\x05\"\xda\x01\n\x04Game\x12\x0e\n\x06gameId\x18\x01 \x01(\t\x12\x0f\n\x07player1\x18\x02 \x01(\t\x12\x0f\n\x07player2\x18\x03 \x01(\t\x12\x1a\n\x12\x66irstPlayerInnings\x18\x04 \x01(\x08\x12\"\n\x0c\x66irstInnings\x18\x05 \x01(\x0b\x32\x0c.InningsData\x12#\n\rsecondInnings\x18\x06 \x01(\x0b\x32\x0c.InningsData\x12\x19\n\x05\x62\x61lls\x18\x07 \x03(\x0b\x32\n.BallEvent\x12\x10\n\x08gameOver\x18\x08 \x01(\x08\x12\x0e\n\x06winner\x18\t \x01(\t\"5\n\x11\x43reateGameRequest\x12\x0f\n\x07player1\x18\x01 \x01(\t\x12\x0f\n\x07player2\x18\x02 \x01(\t\")\n\x12\x43reateGameResponse\x12\x13\n\x04game\x18\x01 \x01(\x0b\x32\x05.Game\" \n\x0eGetGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\t*8\n\x08\x42\x61llType\x12\n\n\x06Normal\x10\x00\x12\x08\n\x04Wide\x10\x01\x12\n\n\x06NoBall\x10\x02\x12\n\n\x06Wicket\x10\x03\x32\x8c\x01\n\x0bGameService\x12\x37\n\nCreateGame\x12\x12.CreateGameRequest\x1a\x13.CreateGameResponse\"\x00\x12\x1f\n\x08PlayBall\x12\n.BallEvent\x1a\x05.Game\"\x00\x12#\n\x07GetGame\x12\x0f.GetGameRequest\x1a\x05.Game\"\x00\x42\x06Z\x04./pbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ngame.proto\"a\n\tBallEvent\x12\x17\n\x04type\x18\x01 \x01(\x0e\x32\t.BallType\x12\x12\n\nballerName\x18\x02 \x01(\t\x12\x13\n\x0b\x62\x61tsmenName\x18\x03 \x01(\t\x12\x12\n\nrunsScored\x18\x04 \x01(\x05\"<\n\x0bInningsData\x12\r\n\x05score\x18\x01 \x01(\x05\x12\x0f\n\x07wickets\x18\x02 \x01(\x05\x12\r\n\x05\x62\x61lls\x18\x03 \x01(\x05\"\xda\x01\n\x04Game\x12\x0e\n\x06gameId\x18\x01 \x01(\t\x12\x0f\n\x07player1\x18\x02 \x01(\t\x12\x0f\n\x07player2\x18\x03 \x01(\t\x12\x1a\n\x12\x66irstPlayerInnings\x18\x04 \x01(\x08\x12\"\n\x0c\x66irstInnings\x18\x05 \x01(\x0b\x32\x0c.InningsData\x12#\n\rsecondInnings\x18\x06 \x01(\x0b\x32\x0c.InningsData\x12\x19\n\x05\x62\x61lls\x18\x07 \x03(\x0b\x32\n.BallEvent\x12\x10\n\x08gameOver\x18\x08 \x01(\x08\x12\x0e\n\x06winner\x18\t \x01(\t\"5\n\x11\x43reateGameRequest\x12\x0f\n\x07player1\x18\x01 \x01(\t\x12\x0f\n\x07player2\x18\x02 \x01(\t\")\n\x12\x43reateGameResponse\x12\x13\n\x04game\x18\x01 \x01(\x0b\x32\x05.Game\" \n\x0eGetGameRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\t\"B\n\x0fPlayBallRequest\x12\x0e\n\x06gameId\x18\x01 \x01(\t\x12\x1f\n\x0b\x62\x61llerEvent\x18\x02 \x01(\x0b\x32\n.BallEvent*8\n\x08\x42\x61llType\x12\n\n\x06Normal\x10\x00\x12\x08\n\x04Wide\x10\x01\x12\n\n\x06NoBall\x10\x02\x12\n\n\x06Wicket\x10\x03\x32\x92\x01\n\x0bGameService\x12\x37\n\nCreateGame\x12\x12.CreateGameRequest\x1a\x13.CreateGameResponse\"\x00\x12%\n\x08PlayBall\x12\x10.PlayBallRequest\x1a\x05.Game\"\x00\x12#\n\x07GetGame\x12\x0f.GetGameRequest\x1a\x05.Game\"\x00\x42\x06Z\x04./pbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,8 +22,8 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'game_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z\004./pb'
-  _globals['_BALLTYPE']._serialized_start=528
-  _globals['_BALLTYPE']._serialized_end=584
+  _globals['_BALLTYPE']._serialized_start=596
+  _globals['_BALLTYPE']._serialized_end=652
   _globals['_BALLEVENT']._serialized_start=14
   _globals['_BALLEVENT']._serialized_end=111
   _globals['_INNINGSDATA']._serialized_start=113
@@ -36,6 +36,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_CREATEGAMERESPONSE']._serialized_end=492
   _globals['_GETGAMEREQUEST']._serialized_start=494
   _globals['_GETGAMEREQUEST']._serialized_end=526
-  _globals['_GAMESERVICE']._serialized_start=587
-  _globals['_GAMESERVICE']._serialized_end=727
+  _globals['_PLAYBALLREQUEST']._serialized_start=528
+  _globals['_PLAYBALLREQUEST']._serialized_end=594
+  _globals['_GAMESERVICE']._serialized_start=655
+  _globals['_GAMESERVICE']._serialized_end=801
 # @@protoc_insertion_point(module_scope)

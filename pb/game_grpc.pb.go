@@ -29,7 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GameServiceClient interface {
 	CreateGame(ctx context.Context, in *CreateGameRequest, opts ...grpc.CallOption) (*CreateGameResponse, error)
-	PlayBall(ctx context.Context, in *BallEvent, opts ...grpc.CallOption) (*Game, error)
+	PlayBall(ctx context.Context, in *PlayBallRequest, opts ...grpc.CallOption) (*Game, error)
 	GetGame(ctx context.Context, in *GetGameRequest, opts ...grpc.CallOption) (*Game, error)
 }
 
@@ -51,7 +51,7 @@ func (c *gameServiceClient) CreateGame(ctx context.Context, in *CreateGameReques
 	return out, nil
 }
 
-func (c *gameServiceClient) PlayBall(ctx context.Context, in *BallEvent, opts ...grpc.CallOption) (*Game, error) {
+func (c *gameServiceClient) PlayBall(ctx context.Context, in *PlayBallRequest, opts ...grpc.CallOption) (*Game, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Game)
 	err := c.cc.Invoke(ctx, GameService_PlayBall_FullMethodName, in, out, cOpts...)
@@ -76,7 +76,7 @@ func (c *gameServiceClient) GetGame(ctx context.Context, in *GetGameRequest, opt
 // for forward compatibility.
 type GameServiceServer interface {
 	CreateGame(context.Context, *CreateGameRequest) (*CreateGameResponse, error)
-	PlayBall(context.Context, *BallEvent) (*Game, error)
+	PlayBall(context.Context, *PlayBallRequest) (*Game, error)
 	GetGame(context.Context, *GetGameRequest) (*Game, error)
 	mustEmbedUnimplementedGameServiceServer()
 }
@@ -91,7 +91,7 @@ type UnimplementedGameServiceServer struct{}
 func (UnimplementedGameServiceServer) CreateGame(context.Context, *CreateGameRequest) (*CreateGameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateGame not implemented")
 }
-func (UnimplementedGameServiceServer) PlayBall(context.Context, *BallEvent) (*Game, error) {
+func (UnimplementedGameServiceServer) PlayBall(context.Context, *PlayBallRequest) (*Game, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PlayBall not implemented")
 }
 func (UnimplementedGameServiceServer) GetGame(context.Context, *GetGameRequest) (*Game, error) {
@@ -137,7 +137,7 @@ func _GameService_CreateGame_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _GameService_PlayBall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BallEvent)
+	in := new(PlayBallRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ func _GameService_PlayBall_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: GameService_PlayBall_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GameServiceServer).PlayBall(ctx, req.(*BallEvent))
+		return srv.(GameServiceServer).PlayBall(ctx, req.(*PlayBallRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

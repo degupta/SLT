@@ -1,0 +1,55 @@
+syntax = "proto3";
+option go_package = "./pb";
+
+enum BallType {
+    Normal = 0;
+    Wide = 1;
+    NoBall = 2;
+    Wicket = 3;
+}
+
+message BallEvent {
+    BallType type = 1;
+    string ballerName = 2;
+    string batsmenName = 3;
+    int32 runsScored = 4;
+}
+
+message InningsData {
+    int32 score = 1;
+    int32 wickets = 2;
+    int32 balls = 3;
+}
+
+message Game {
+    string gameId = 1;
+    string player1 = 2;
+    string player2 = 3;
+    bool firstPlayerInnings = 4;
+    InningsData firstInnings = 5;
+    InningsData secondInnings = 6;
+    repeated BallEvent balls = 7;
+    bool gameOver = 8;
+    string winner = 9;
+}
+
+message CreateGameRequest {
+  string player1 = 1;
+  string player2 = 2;
+}
+
+message CreateGameResponse {
+    Game game = 1;
+}
+
+message GetGameRequest {
+    string gameId = 1;
+}
+
+service GameService {
+  rpc CreateGame (CreateGameRequest) returns (CreateGameResponse) {}
+
+  rpc PlayBall (BallEvent) returns (Game) {}
+
+  rpc GetGame (GetGameRequest) returns (Game) {}
+}
